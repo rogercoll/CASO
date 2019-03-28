@@ -45,6 +45,7 @@ int main(){
 		if(err == MACH_MSG_SUCCESS){
 			printf("Message recived");
 		}
+		printf("%d\n",err);
 		int status;
 		waitpid(-1,&status,0); 
 	

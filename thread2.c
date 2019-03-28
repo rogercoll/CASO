@@ -30,11 +30,15 @@ int main(){
 		printf("Error creating thread");
 	}
 	thread_get_state(child_p, i386_THREAD_STATE,(thread_state_t)&estat_thread, &more_info); 
-	estat_thread.uesp = threadStack[STACK_SIZE] -100;
+	estat_thread.uesp = &threadStack[STACK_SIZE] -100;
 	estat_thread.eip = bucle_infinit;
 	res = thread_set_state(child_p, i386_THREAD_STATE, (thread_state_t *)(&estat_thread), more_info);
 	if (res != KERN_SUCCESS){
 		printf("Error while setting state");
+	}
+	res = mach_setup_tls(child_p);
+	if (res != KERN_SUCCESS){
+		printf("Error while setting tls");
 	}
 	res = thread_resume(child_p);
 	if (res != KERN_SUCCESS){
