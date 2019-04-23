@@ -1,0 +1,2 @@
+1- El gettimeofday té precisió de microsegons i el clock_gettime de nano.
+2- 
